@@ -1,0 +1,12 @@
+---
+
+- name: Download NeoFS REST binary
+  ansible.builtin.get_url:
+    url: '{{ neofs_rest__bin_url }}'
+    dest: '{{ neofs_rest__bin_path }}/neofs-rest-gw'
+    force: yes
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  notify: [ 'Restart NeoFS REST service' ]
+  when: neofs_rest__binaries_download | bool

@@ -1,0 +1,16 @@
+---
+
+- name: Create NeoFS REST group
+  ansible.builtin.group:
+    name: '{{ neofs_rest__group }}'
+    system: yes
+
+- name: Create NeoFS REST user
+  ansible.builtin.user:
+    name: '{{ neofs_rest__user }}'
+    group: '{{ neofs_rest__group }}'
+    password: '*'
+    shell: '/usr/sbin/nologin'
+    home: '{{ neofs_rest__conf_dir }}'
+    system: yes
+    skeleton: no
