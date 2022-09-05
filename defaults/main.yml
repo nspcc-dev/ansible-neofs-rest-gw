@@ -16,21 +16,21 @@ neofs_rest__wallet_address: ''
 neofs_rest__wallet_password: ''
 
 neofs_rest__rest_address: 'localhost'
-neofs_rest__rest_port: 8888
+neofs_rest__rest_port: 8880
 neofs_rest__rest_allow: []
 neofs_rest__rest_group_allow: []
 neofs_rest__rest_host_allow: []
 
 neofs_rest__prometheus_enabled: False
 neofs_rest__prometheus_address: 'localhost'
-neofs_rest__prometheus_port: 5662
+neofs_rest__prometheus_port: 5672
 neofs_rest__prometheus_allow: []
 neofs_rest__prometheus_group_allow: []
 neofs_rest__prometheus_host_allow: []
 
 neofs_rest__pprof_enabled: False
 neofs_rest__pprof_address: 'localhost'
-neofs_rest__pprof_port: 5661
+neofs_rest__pprof_port: 5671
 neofs_rest__pprof_allow: []
 neofs_rest__pprof_group_allow: []
 neofs_rest__pprof_host_allow: []
