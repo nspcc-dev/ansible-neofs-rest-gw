@@ -110,7 +110,6 @@ neofs_rest__ferm__dependent_rules:
     daddr: [ '{{ neofs_rest__rest_address }}' ]
     saddr: '{{ neofs_rest__rest_allow + neofs_rest__rest_group_allow + neofs_rest__rest_host_allow }}'
     protocol: 'tcp'
-    role: 'neofs-rest-gw'
     rule_state: 'present'
 
   - type: 'accept'
@@ -119,7 +118,6 @@ neofs_rest__ferm__dependent_rules:
     daddr: [ '{{ neofs_rest__prometheus_address }}' ]
     saddr: '{{ neofs_rest__prometheus_allow + neofs_rest__prometheus_group_allow + neofs_rest__prometheus_host_allow }}'
     protocol: 'tcp'
-    role: 'neofs-rest-gw'
     rule_state: "{{ 'present' if neofs_rest__prometheus_enabled else 'absent' }}"
 
   - type: 'accept'
@@ -128,7 +126,6 @@ neofs_rest__ferm__dependent_rules:
     daddr: [ '{{ neofs_rest__pprof_address }}' ]
     saddr: '{{ neofs_rest__pprof_allow + neofs_rest__pprof_group_allow + neofs_rest__pprof_host_allow }}'
     protocol: 'tcp'
-    role: 'neofs-rest-gw'
     rule_state: "{{ 'present' if neofs_rest__pprof_enabled else 'absent' }}"
 
 # Flag to skip binaries download on False value
