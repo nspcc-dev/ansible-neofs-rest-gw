@@ -9,4 +9,3 @@
     group: 'root'
     mode: '0755'
   notify: [ 'Restart NeoFS REST service' ]
-  when: neofs_rest__binaries_download | bool
