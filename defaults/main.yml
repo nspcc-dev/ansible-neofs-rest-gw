@@ -56,7 +56,7 @@ neofs_rest__raw_config:
     path: '{{ neofs_rest__wallet_path }}'
     address: '{{ neofs_rest__wallet_address }}'
     passphrase: '{{ neofs_rest__wallet_password }}'
-  listen-address: '{{ neofs_rest__rest_address }}:{{ neofs_rest__rest_port }}'
+  listen-address: '{{ neofs_rest__rest_address | ansible.utils.ipwrap }}:{{ neofs_rest__rest_port }}'
   pool-error-threshold: '{{ neofs_rest__pool_error_threshold }}'
   node-dial-timeout: '{{ neofs_rest__node_dial_timeout }}'
   healthcheck-timeout: '{{ neofs_rest__healthcheck_timeout }}'
@@ -80,12 +80,12 @@ neofs_rest__default_config:
     options:
       pprof:
         enabled: True
-        address: '{{ neofs_rest__pprof_address }}:{{ neofs_rest__pprof_port }}'
+        address: '{{ neofs_rest__pprof_address | ansible.utils.ipwrap }}:{{ neofs_rest__pprof_port }}'
   - enabled: '{{ neofs_rest__prometheus_enabled }}'
     options:
       prometheus:
         enabled: True
-        address: '{{ neofs_rest__prometheus_address }}:{{ neofs_rest__prometheus_port }}'
+        address: '{{ neofs_rest__prometheus_address | ansible.utils.ipwrap }}:{{ neofs_rest__prometheus_port }}'
 
 neofs_rest__config: []
 neofs_rest__group_config: []
@@ -107,7 +107,7 @@ neofs_rest__ferm__dependent_rules:
   - type: 'accept'
     name: 'neofs-rest{{ neofs_rest__instance }}_rest'
     dport: [ '{{ neofs_rest__rest_port }}' ]
-    daddr: [ '{{ neofs_rest__rest_address }}' ]
+    daddr: [ "{{ neofs_rest__rest_address }}{{ '/0' if neofs_rest__rest_address in ['0.0.0.0', '::0', '::'] }}" ]
     saddr: '{{ neofs_rest__rest_allow + neofs_rest__rest_group_allow + neofs_rest__rest_host_allow }}'
     protocol: 'tcp'
     rule_state: 'present'
@@ -115,7 +115,7 @@ neofs_rest__ferm__dependent_rules:
   - type: 'accept'
     name: 'neofs-rest{{ neofs_rest__instance }}_prometheus'
     dport: [ '{{ neofs_rest__prometheus_port }}' ]
-    daddr: [ '{{ neofs_rest__prometheus_address }}' ]
+    daddr: [ "{{ neofs_rest__prometheus_address }}{{ '/0' if neofs_rest__prometheus_address in ['0.0.0.0', '::0', '::'] }}" ]
     saddr: '{{ neofs_rest__prometheus_allow + neofs_rest__prometheus_group_allow + neofs_rest__prometheus_host_allow }}'
     protocol: 'tcp'
     rule_state: "{{ 'present' if neofs_rest__prometheus_enabled else 'absent' }}"
@@ -123,7 +123,7 @@ neofs_rest__ferm__dependent_rules:
   - type: 'accept'
     name: 'neofs-rest{{ neofs_rest__instance }}_pprof'
     dport: [ '{{ neofs_rest__pprof_port }}' ]
-    daddr: [ '{{ neofs_rest__pprof_address }}' ]
+    daddr: [ "{{ neofs_rest__pprof_address }}{{ '/0' if neofs_rest__pprof_address in ['0.0.0.0', '::0', '::'] }}" ]
     saddr: '{{ neofs_rest__pprof_allow + neofs_rest__pprof_group_allow + neofs_rest__pprof_host_allow }}'
     protocol: 'tcp'
     rule_state: "{{ 'present' if neofs_rest__pprof_enabled else 'absent' }}"
