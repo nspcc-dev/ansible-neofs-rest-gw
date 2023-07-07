@@ -23,14 +23,14 @@ neofs_rest__rest_host_allow: []
 
 neofs_rest__prometheus_enabled: False
 neofs_rest__prometheus_address: 'localhost'
-neofs_rest__prometheus_port: 5672
+neofs_rest__prometheus_port: 9941
 neofs_rest__prometheus_allow: []
 neofs_rest__prometheus_group_allow: []
 neofs_rest__prometheus_host_allow: []
 
 neofs_rest__pprof_enabled: False
 neofs_rest__pprof_address: 'localhost'
-neofs_rest__pprof_port: 5671
+neofs_rest__pprof_port: 9942
 neofs_rest__pprof_allow: []
 neofs_rest__pprof_group_allow: []
 neofs_rest__pprof_host_allow: []
